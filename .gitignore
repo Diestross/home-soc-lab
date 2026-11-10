@@ -1,0 +1,18 @@
+# Credenciales y artefactos de instalación de Wazuh
+wazuh-install-files.tar
+*.log
+*passwords*
+*.pem
+*.key
+
+# Evidencias sin sanitizar
+**/originales/
+**/*-sin-sanitizar.*
+
+# Exportaciones de datos en bruto
+alerts*.json
+*.evtx
+
+# Archivos de sistema
+Thumbs.db
+desktop.ini
