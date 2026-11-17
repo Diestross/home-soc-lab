@@ -30,3 +30,45 @@
     </mitre>
   </rule>
 </group>
+
+<!-- Home SOC Lab - Caso 3: tareas programadas sospechosas y borrado de tareas -->
+<group name="local,windows,scheduled_task,">
+  <rule id="100110" level="10">
+    <if_sid>60228</if_sid>
+    <field name="win.eventdata.taskContent" type="pcre2">(?i)Command(?:\x26gt;|\x3e)(?:[^\x26\x3c]*\\+(?:Users\\+Public|AppData|Temp|ProgramData)\\+|(?:[^\x26\x3c]*\\+)?(?:powershell|pwsh|cmd|mshta|rundll32|regsvr32|wscript|cscript)(?:\.exe)?(?:\x26lt;|\x3c))</field>
+    <description>Scheduled task created with a suspicious action (LOLBin or user-writable path): $(win.eventdata.taskName)</description>
+    <mitre>
+      <id>T1053.005</id>
+    </mitre>
+  </rule>
+
+  <rule id="100111" level="5">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">^4699$</field>
+    <description>A scheduled task was deleted: $(win.eventdata.taskName)</description>
+    <mitre>
+      <id>T1070</id>
+    </mitre>
+  </rule>
+</group>
+
+<!-- Home SOC Lab - Caso 4: valores añadidos a claves Run (persistencia) -->
+<group name="local,sysmon,autostart,">
+  <rule id="100120" level="7">
+    <if_sid>92300</if_sid>
+    <field name="win.eventdata.targetObject" type="pcre2">(?i)\\+CurrentVersion\\+Run(?:Once|OnceEx|Services|ServicesOnce)?\\+[^\\]+$</field>
+    <description>Value set in a Run registry key (autostart on logon): $(win.eventdata.targetObject)</description>
+    <mitre>
+      <id>T1547.001</id>
+    </mitre>
+  </rule>
+
+  <rule id="100121" level="12">
+    <if_sid>100120</if_sid>
+    <field name="win.eventdata.details" type="pcre2">(?i)(?:\\+(?:Users\\+Public|AppData|Temp|ProgramData)\\+|(?:^|\\+|\s|")(?:powershell|pwsh|cmd|mshta|rundll32|regsvr32|wscript|cscript)(?:\.exe)?(?:\s|"|$))</field>
+    <description>Run registry key points to a LOLBin or user-writable path: $(win.eventdata.details)</description>
+    <mitre>
+      <id>T1547.001</id>
+    </mitre>
+  </rule>
+</group>
