@@ -206,8 +206,6 @@ Repetición de las tres pruebas a las 17:33:
 | C: `bitsadmin /transfer` | 100130 (10) | ✅ 100130 (10) |
 | C: cambio de inicio del servicio BITS | 61104 (3) | ✅ 61104 (3), 100 ms después de la 100130 |
 
-![Alertas de validación de las reglas 100130 y 100131](../../evidencias/caso-05/01-alertas-validacion-100130-100131.png)
-
 **Investigación:** ante una alerta 100130, el analista puede corroborar que hubo una descarga real buscando, en los segundos siguientes, la alerta 61104 (BITS cambia a inicio automático) y la consulta DNS de `svchost.exe` (evento 22) al dominio de la URL que aparece en la línea de comandos.
 
 ---
