@@ -157,8 +157,6 @@ New-ItemProperty -Path $run -Name 'HomeSOCLab-E4-ruta' -Value 'C:\Users\Public\H
 | `ruta` (`C:\Users\Public\`) | 100121 (12) | ✅ 100121 (12) |
 | Eventos `RunNotification` de `sihost.exe` | Ninguna alerta | ✅ Ninguna alerta |
 
-![Alertas de validación de las reglas 100120 y 100121](../../evidencias/caso-04/01-alertas-validacion-100120-100121.png)
-
 ---
 
 ## 5. Prueba 2 — FIM de registro del agente

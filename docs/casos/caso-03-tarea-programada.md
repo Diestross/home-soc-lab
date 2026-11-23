@@ -262,8 +262,6 @@ Start-Sleep -Seconds 5
 | `lolbin` (powershell) | 100110 (10) → ✅ 100110 (10) | 100111 (5) → ✅ 100111 (5) |
 | `ruta` (`\Users\Public\`) | 100110 (10) → ✅ 100110 (10) | 100111 (5) → ✅ 100111 (5) |
 
-![Alertas de validación de las reglas 100110 y 100111](../../evidencias/caso-03/01-alertas-validacion-100110-100111.png)
-
 ---
 
 ## 7. Limitaciones
