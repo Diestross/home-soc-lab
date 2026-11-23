@@ -170,8 +170,18 @@ Verificación desde el endpoint con `Test-NetConnection`: 22, 443, 1514 y 1515 �
 | Integridad del software | Hash SHA256 de la ISO de Ubuntu comprobado; firmas Authenticode de Sysmon (Microsoft) y del agente (Wazuh, Inc) verificadas |
 | Sincronización horaria | NTP en la VM (`systemd-timesyncd`) y W32Time en el endpoint, sincronizando cada hora |
 | Cambios en las reglas | Copia de seguridad de `local_rules.xml` y validación con `wazuh-analysisd -t` antes de cada reinicio del Manager |
-| Puntos de restauración | Instantáneas de VirtualBox: `01-ubuntu-24.04.5-limpio-pre-wazuh` y `02-wazuh-4.14.10-aio-ufw-ok` |
+| Puntos de restauración | Instantáneas de VirtualBox en cada hito (ver tabla siguiente) |
 
+
+### 7.1 Instantáneas de la VM
+
+| Instantánea | Fecha | Estado que conserva |
+|---|---|---|
+| `01-ubuntu-24.04.5-limpio-pre-wazuh` | 2026-11-09 | Ubuntu recién instalado, disco ampliado y sistema actualizado, sin Wazuh |
+| `02-wazuh-4.14.10-aio-ufw-ok` | 2026-11-09 | Wazuh All-in-One instalado, credenciales protegidas y UFW activo |
+| `04-escenario-2-regla-100100` | 2026-11-12 | Primera regla personalizada (100100) desplegada |
+| `Escenario 5 (conexiones de red)` | 2026-11-17 | Reglas 100110, 100111, 100120 y 100121 desplegadas (estado al cerrar el escenario 4) |
+| `06-escenario-5-reglas-100130` | 2026-11-23 | Las siete reglas personalizadas desplegadas |
 ---
 
 ## 8. Limitaciones de la arquitectura
