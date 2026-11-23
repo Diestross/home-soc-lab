@@ -72,3 +72,27 @@
     </mitre>
   </rule>
 </group>
+
+<!-- Home SOC Lab - Caso 5: descargas con BITS y conexiones de PowerShell a Internet -->
+<group name="local,sysmon,network,">
+  <rule id="100130" level="10">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\bitsadmin\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)\s/(transfer|addfile|download|setnotifycmdline)\b</field>
+    <description>bitsadmin used to create a BITS transfer job (possible file download): $(win.eventdata.commandLine)</description>
+    <mitre>
+      <id>T1197</id>
+      <id>T1105</id>
+    </mitre>
+  </rule>
+
+  <rule id="100131" level="6">
+    <if_sid>92101</if_sid>
+    <field name="win.eventdata.destinationIp" type="pcre2">^(?!(?:10\.|127\.|192\.168\.|172\.(?:1[6-9]|2\d|3[01])\.|169\.254\.|::1$|(?i:fe80:|f[cd][0-9a-f]{2}:)))</field>
+    <description>PowerShell opened a TCP connection to a public IP address: $(win.eventdata.destinationIp):$(win.eventdata.destinationPort)</description>
+    <mitre>
+      <id>T1071.001</id>
+      <id>T1105</id>
+    </mitre>
+  </rule>
+</group>
